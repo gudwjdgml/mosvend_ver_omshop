@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> OMshop - Code Gen </title>
+
+    <link rel="stylesheet" href="/static/assets/vendor/fonts/boxicons.css" />
+
+    <link rel="stylesheet" href="/static/assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="/static/assets/vendor/css/theme-default.css" />
+    <link rel="stylesheet" href="/static/assets/css/demo.css" />
+
+    <link rel="stylesheet" href="/static/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="/static/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <script src="/static/assets/vendor/js/helpers.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="/static/assets/js/config.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/player.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
+    <script>
+        function code_gen() {
+            $.ajax({
+                url: "/code_gen",
+                type: "post",
+                data: $("form").serialize()
+            }).done(function (data) {
+                if (data.includes("OK")) {
+                    toastr.success('성공적으로 생성되었습니다. 클립보드 복사완료!');
+                    copy(data.replace("OK\n", ""));
+                } else {
+                    toastr.error(data);
+                }
+            })
+        }
+
+        function copy(val) {
+            var dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = val;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+        }
+
+        function logout() {
+            location.href = '/logout';
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container-xxl container-p-y"
+        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+        <div class="row">
+            <div class="col-md-6 w-100">
+                <div class="card mb-4">
+                    <h5 class="card-header">OMshop - Code Gen</h5>
+
+                    <button type="button" class="btn btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="logout()"> 로그아웃 </button>
+
+                    <div class="card-body">
+                        <form name="form">
+                            <div class="mb-3">
+                                <label class="form-label"> 라이센스 기간 </label>
+                                <input class="form-control" placeholder="라이센스 기간 ( 숫자 )" name="days" id="days">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"> 생성할 개수 </label>
+                                <input class="form-control" placeholder="생성할 개수 ( 숫자 )" name="amount" id="amount">
+                            </div>
+                            <button type="button" class="btn btn-primary" style="width: 100%;" onclick="code_gen()"> 생성하기 </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="/static/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/static/assets/vendor/js/bootstrap.js"></script>
+    <script src="/static/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="/static/assets/vendor/js/menu.js"></script>
+
+    <script src="/static/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <script src="/static/assets/js/main.js"></script>
+
+    <script src="/static/assets/js/dashboards-analytics.js"></script>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</html>

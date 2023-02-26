@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> {{shop_name}} </title>
+
+    <link rel="stylesheet" href="/static/css/login.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="<a href='https://ifh.cc/v-qd0lV6' target='_blank'><img src='https://ifh.cc/g/qd0lV6.png' border='0'></a>">
+
+    <script src="/static/js/block_debug.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
+    <script type="text/javascript">
+        var filter = "win16|win32|win64|mac";
+        if (navigator.platform) {
+            if (0 > filter.indexOf(navigator.platform.toLowerCase())) {} else {
+                devtoolsDetector.addListener(function (isOpen, detail) {
+                    if (isOpen) {
+                        swal.fire(
+                            "개발자 도구 감지",
+                            '개발자 도구가 감지 되었습니다.',
+                            "error"
+                        );
+                        window.location.href = `http://warning.or.kr`
+                        return;
+                    }
+                });
+                devtoolsDetector.lanuch();
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).bind('keydown', function (e) {
+                if (e.keyCode == 123) {
+                    e.preventDefault();
+                    e.returnValue = false;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login_form">
+            <div class="logo">
+                {{shop_name}}
+            </div>
+            <div class="title">
+                <h1> 환영합니다! ㅣ <small>회원가입</small> </h1>
+                <p> User Register </p>
+                <br>
+            </div>
+            <div class="form-item">
+                <input type="text" name="id" id="id" placeholder="아이디" />
+            </div>
+            <div class="form-item">
+                <input type="password" name="pw" id="pw" placeholder="비밀번호" />
+            </div>
+            <div class="form-item">
+                <input type="password" name="re_pw" id="re_pw" placeholder="비밀번호 확인" />
+            </div>
+            <div class="form-item">
+                <input type="text" name="phone_number" id="phone_number" placeholder="전화번호 또는 카톡ID (선택)" />
+                <small style="line-height: 1.2em; margin-top: 0px; display: block; font-size: 80%; color: #999;">
+                  *연락처는 문제시에 연락을 드리기 위함이며 어떠한 경우에도 홍보목적으로 사용되지 않으며, 엄격하게 관리되어 유출되지 않습니다. 가급적 적으시는걸 추천드립니다.
+                </small>
+            </div>
+            <div class="form-item" style="margin-top: 19px;">
+                <button onclick="register()"> 회원가입 </button>
+            </div>
+            <a href="/{{shop_name}}/login"> 이미 아이디가 있으신가요? 로그인하기 </a>
+        </div>
+    </div>
+    <script>
+        function register() {
+            id = document.querySelector("#id").value;
+            pw = document.querySelector("#pw").value;
+            re_pw = document.querySelector("#re_pw").value;
+            phone_number = document.querySelector("#phone_number").value;
+
+            $.ajax({
+                url: "/{{shop_name}}/register",
+                type: "post",
+                data: {
+                    id: id,
+                    pw: pw,
+                    re_pw: re_pw,
+                    phone_number: phone_number
+                },
+            }).done(function (data) {
+                if (data == "register_success") {
+                    location.href = '/{{shop_name}}';
+                } else {
+                    toastr.error(data);
+                }
+            })
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</body>
+
+</html>
