@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -261,9 +261,9 @@
                     <input type="text" class="form-control" name="product_setting_description_1"
                       id="product_setting_description_1" value="{{product_info[1]}}">
                     <br>
-                    <label> 상품 자세한 소개 </label>
-                    <input type="text" class="form-control" name="product_setting_description_2"
-                      id="product_setting_description_2" placeholder='줄바꿈 ( <br> )' value="{{product_info[12]}}">
+                    <label> 상품 자세한 소개 </label><br>
+                    <textarea id="product_setting_description_2" rows="10" name="product_setting_description_2" cols="150" style="height: 150px;"
+                      placeholder='줄바꿈 ( <br> )' value="{{product_info[12]}}"></textarea>
                     <br>
                     <label> 상품 이미지 URL (500 x 300) </label>
                     <input type="text" class="form-control" name="product_setting_image_url"
@@ -396,7 +396,6 @@
       product_option_3_price = document.querySelector("#product_setting_option_3_price").value;
 
       product_description_1 = document.querySelector("#product_setting_description_1").value;
-      product_description_2 = document.querySelector("#product_setting_description_2").value;
 
       product_image_url = document.querySelector("#product_setting_image_url").value;
 
@@ -430,7 +429,6 @@
             data: {
               product_setting_category: product_setting_category,
               product_name: product_name,
-              product_description_2: product_description_2,
               product_option_1_name: product_option_1_name,
               product_option_2_name: product_option_2_name,
               product_option_3_name: product_option_3_name,
